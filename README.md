@@ -34,20 +34,30 @@ npx playwright test --project=chromium
 
 ```
 tests/
-├── example.spec.ts                    # Basic title verification
-├── Template.spec.ts                   # Blank template for new tests
+├── example.spec.ts                         # Basic title verification
+├── Template.spec.ts                        # Blank template for new tests
 ├── 01 Basics/
-│   ├── 229_Basic_Test.spec.ts         # Fundamentals: goto + toHaveTitle
-│   └── 230_Test_Annoations.spec.ts    # Annotations: skip, only, fail, slow
-└── 02_first_tests/
-    ├── 231_First_Running_Verify.spec.ts  # Locators & visibility assertions
-    ├── 232_BCP.spec.ts                   # Browser-Context-Page hierarchy
-    ├── 233_BCP_MultipeContext.spec.ts    # Multiple contexts = multiple users
-    ├── 234_BCP_Multiple_Pages.spec.ts    # Multiple pages (tabs) per context
-    ├── 235_TEST_I_PW.spec.ts             # Playwright Test isolation & fill/click
-    ├── 236_BCP_TEST_PW.spec.ts           # Manual multi-user with browser fixture
-    ├── 237_BCP_Test_Options.spec.ts      # Context options: viewport, locale, mobile
-    └── 6thJuly.spec.ts                   # Multi-context with different apps
+│   ├── 229_Basic_Test.spec.ts              # Fundamentals: goto + toHaveTitle
+│   └── 230_Test_Annoations.spec.ts         # Annotations: skip, only, fail, slow
+├── 02_first_tests/
+│   ├── 231_First_Running_Verify.spec.ts    # Locators & visibility assertions
+│   ├── 232_BCP.spec.ts                     # Browser-Context-Page hierarchy
+│   ├── 233_BCP_MultipeContext.spec.ts      # Multiple contexts = multiple users
+│   ├── 234_BCP_Multiple_Pages.spec.ts      # Multiple pages (tabs) per context
+│   ├── 235_TEST_I_PW.spec.ts               # Playwright Test isolation & fill/click
+│   ├── 236_BCP_TEST_PW.spec.ts             # Manual multi-user with browser fixture
+│   ├── 237_BCP_Test_Options.spec.ts        # Context options: viewport, locale, mobile
+│   └── 6thJuly.spec.ts                     # Multi-context with different apps
+└── 03_Locators_Commands/
+    ├── 238_LS.spec.ts                      # Basic page.goto() navigation
+    ├── 239_Project_VWO_Login.spec.ts       # CSS selectors, fill, click, auto-wait
+    ├── 240_Xpath.spec.ts                   # XPath locators (placeholder)
+    ├── 241_Project_3_Singup_VWO.spec.ts    # XPath locators, .first(), .textContent()
+    ├── 242_Project_3_Singup_VWO_PW_Locator.spec.ts  # getByRole(), .check(), modern locators
+    ├── 243_PW_Command.spec.ts              # goto() waitUntil options
+    ├── 244_Refere_PW.spec.ts               # Custom referer, page.title(), toHaveURL()
+    ├── 245_GetByRole_PW.spec.ts            # getByRole("link") locator
+    └── 246_PressSeq.spec.ts                # pressSequentially() & goBack()
 ```
 
 ## Learning Progression
@@ -63,6 +73,15 @@ tests/
 | 235 | `235_TEST_I_PW.spec.ts` | Playwright Test auto-isolation + `fill()` / `click()` |
 | 236 | `236_BCP_TEST_PW.spec.ts` | Using `{ browser }` fixture for manual multi-user control |
 | 237 | `237_BCP_Test_Options.spec.ts` | Context options: viewport, locale, geolocation, mobile emulation |
+| 238 | `238_LS.spec.ts` | Basic `page.goto()` navigation |
+| 239 | `239_Project_VWO_Login.spec.ts` | CSS selectors, `fill()`, `click()`, auto-wait, `toContainText()` |
+| 240 | `240_Xpath.spec.ts` | XPath locators (placeholder) |
+| 241 | `241_Project_3_Singup_VWO.spec.ts` | XPath locators, `.first()`, `.textContent()`, form validation |
+| 242 | `242_Project_3_Singup_VWO_PW_Locator.spec.ts` | `getByRole()`, `.check()`, modern Playwright locators |
+| 243 | `243_PW_Command.spec.ts` | `goto()` waitUntil options: commit, domcontentloaded, load, networkidle |
+| 244 | `244_Refere_PW.spec.ts` | Default `goto()`, `page.title()`, `toHaveURL()`, custom referer |
+| 245 | `245_GetByRole_PW.spec.ts` | `getByRole("link")` with name & disabled options |
+| 246 | `246_PressSeq.spec.ts` | `pressSequentially()` with delay, `goBack()` navigation |
 
 ## Key Concepts
 
@@ -75,6 +94,14 @@ tests/
 ### Playwright Test Isolation
 
 Each `test()` block receives a fresh `page` fixture in a fresh `context`, ensuring zero shared state between tests by default.
+
+### Locators & Commands
+
+- **CSS Selectors** — `page.locator('#id')`, `page.locator('.class')`, `page.locator('[name=value]')`
+- **XPath** — `page.locator("//button[@data-qa='submit']")`, `.first()` to disambiguate
+- **Playwright Recommended** — `page.getByRole('textbox')`, `page.getByRole('button')`, `page.getByRole('link')`
+- **Actions** — `fill()`, `click()`, `check()`, `pressSequentially()`, `goBack()`
+- **Navigation** — `goto()` with `waitUntil` options (`commit`, `domcontentloaded`, `load`, `networkidle`) and `referer`
 
 > **Note:** Files 232, 233, and 234 are standalone scripts (import from `playwright`, not `@playwright/test`). Run them with `npx ts-node <filename>` instead of `npx playwright test`.
 
