@@ -41,9 +41,9 @@ tests/
 │   └── 230_Test_Annoations.spec.ts         # Annotations: skip, only, fail, slow
 ├── 02_first_tests/
 │   ├── 231_First_Running_Verify.spec.ts    # Locators & visibility assertions
-│   ├── 232_BCP.spec.ts                     # Browser-Context-Page hierarchy
-│   ├── 233_BCP_MultipeContext.spec.ts      # Multiple contexts = multiple users
-│   ├── 234_BCP_Multiple_Pages.spec.ts      # Multiple pages (tabs) per context
+│   ├── 232_BCP.ts                          # Browser-Context-Page hierarchy
+│   ├── 233_BCP_MultipeContext.ts           # Multiple contexts = multiple users
+│   ├── 234_BCP_Multiple_Pages.ts           # Multiple pages (tabs) per context
 │   ├── 235_TEST_I_PW.spec.ts               # Playwright Test isolation & fill/click
 │   ├── 236_BCP_TEST_PW.spec.ts             # Manual multi-user with browser fixture
 │   ├── 237_BCP_Test_Options.spec.ts        # Context options: viewport, locale, mobile
@@ -67,9 +67,9 @@ tests/
 | 229 | `229_Basic_Test.spec.ts` | Most basic test: `page.goto()` + `expect().toHaveTitle()` |
 | 230 | `230_Test_Annoations.spec.ts` | Test annotations: `skip`, `only`, `fail`, `slow`, conditional skip |
 | 231 | `231_First_Running_Verify.spec.ts` | Locator by CSS ID (`#id`) + `toBeVisible()` assertion |
-| 232 | `232_BCP.spec.ts` | Browser -> Context -> Page hierarchy (manual script) |
-| 233 | `233_BCP_MultipeContext.spec.ts` | Multiple contexts for multi-user simulation |
-| 234 | `234_BCP_Multiple_Pages.spec.ts` | Multiple pages (tabs) sharing cookies in one context |
+| 232 | `232_BCP.ts` | Browser -> Context -> Page hierarchy (standalone script) |
+| 233 | `233_BCP_MultipeContext.ts` | Multiple contexts for multi-user simulation (standalone script) |
+| 234 | `234_BCP_Multiple_Pages.ts` | Multiple pages (tabs) sharing cookies in one context (standalone script) |
 | 235 | `235_TEST_I_PW.spec.ts` | Playwright Test auto-isolation + `fill()` / `click()` |
 | 236 | `236_BCP_TEST_PW.spec.ts` | Using `{ browser }` fixture for manual multi-user control |
 | 237 | `237_BCP_Test_Options.spec.ts` | Context options: viewport, locale, geolocation, mobile emulation |
@@ -103,7 +103,7 @@ Each `test()` block receives a fresh `page` fixture in a fresh `context`, ensuri
 - **Actions** — `fill()`, `click()`, `check()`, `pressSequentially()`, `goBack()`
 - **Navigation** — `goto()` with `waitUntil` options (`commit`, `domcontentloaded`, `load`, `networkidle`) and `referer`
 
-> **Note:** Files 232, 233, and 234 are standalone scripts (import from `playwright`, not `@playwright/test`). Run them with `npx ts-node <filename>` instead of `npx playwright test`.
+> **Note:** Files 232, 233, and 234 are standalone scripts (import from `playwright`, not `@playwright/test`). They have `.ts` extension (not `.spec.ts`) so the test runner skips them. Run with `npx ts-node <filename>` directly.
 
 ## Configuration
 
