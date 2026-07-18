@@ -24,12 +24,10 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['html'],
-    ['allure-playwright'],
     ['./Utils/CustomReporter.ts'],
   ],
-  /* Open TTA report in Chromium after tests finish (local only) */
-  globalTeardown: process.env.CI ? undefined : './Utils/openReport.ts',
+  /* Open TTA report in Chromium after every npx playwright test run */
+  globalTeardown: process.env.CI ? undefined : './open-report.js',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
