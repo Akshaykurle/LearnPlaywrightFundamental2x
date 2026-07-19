@@ -48,16 +48,32 @@ tests/
 │   ├── 236_BCP_TEST_PW.spec.ts             # Manual multi-user with browser fixture
 │   ├── 237_BCP_Test_Options.spec.ts        # Context options: viewport, locale, mobile
 │   └── 6thJuly.spec.ts                     # Multi-context with different apps
-└── 03_Locators_Commands/
-    ├── 238_LS.spec.ts                      # Basic page.goto() navigation
-    ├── 239_Project_VWO_Login.spec.ts       # CSS selectors, fill, click, auto-wait
-    ├── 240_Xpath.spec.ts                   # XPath locators (placeholder)
-    ├── 241_Project_3_Singup_VWO.spec.ts    # XPath locators, .first(), .textContent()
-    ├── 242_Project_3_Singup_VWO_PW_Locator.spec.ts  # getByRole(), .check(), modern locators
-    ├── 243_PW_Command.spec.ts              # goto() waitUntil options
-    ├── 244_Refere_PW.spec.ts               # Custom referer, page.title(), toHaveURL()
-    ├── 245_GetByRole_PW.spec.ts            # getByRole("link") locator
-    └── 246_PressSeq.spec.ts                # pressSequentially() & goBack()
+├── 03_Locators_Commands/
+│   ├── 238_LS.spec.ts                      # Basic page.goto() navigation
+│   ├── 239_Project_VWO_Login.spec.ts       # CSS selectors, fill, click, auto-wait
+│   ├── 240_Xpath.spec.ts                   # XPath locators (placeholder)
+│   ├── 241_Project_3_Singup_VWO.spec.ts    # XPath locators, .first(), .textContent()
+│   ├── 242_Project_3_Singup_VWO_PW_Locator.spec.ts  # getByRole(), .check(), modern locators
+│   ├── 243_PW_Command.spec.ts              # goto() waitUntil options
+│   ├── 244_Refere_PW.spec.ts               # Custom referer, page.title(), toHaveURL()
+│   ├── 245_GetByRole_PW.spec.ts            # getByRole("link") locator
+│   └── 246_PressSeq.spec.ts                # pressSequentially() & goBack()
+├── 04_Session_Storage/
+│   ├── 247_SessionStorage.spec.ts          # Save browser session to JSON file
+│   └── 249_TestVWODashboard_NoCustomReport.spec.ts  # Reuse session — skip login
+├── 05_Allure_Reporting/
+│   └── 248_TestVWODashboard.spec.ts        # test.step() with attachments & screenshots
+├── 06_Multiple_Element/
+│   ├── 250_Multi_Element.spec.ts           # Loop through elements, allInnerTexts(), all()
+│   └── 251_Multi_Element_Direct.spec.ts    # getByTestId() for unique element targeting
+├── 07_WebTables/
+│   ├── 252_WebTables_Dynamic_Xpath.spec.ts # Dynamic XPath for web table traversal
+│   └── 253_WebTable_Dynamic.spec.ts        # Structured row extraction with allInnerTexts()
+└── tasks/
+    └── Project_Automate_Login_for_the_Student.spec.ts  # Practice: login automation
+
+Utils/
+└── CustomReporter.ts                       # Custom HTML reporter (TTA Report)
 ```
 
 ## Learning Progression
@@ -82,6 +98,13 @@ tests/
 | 244 | `244_Refere_PW.spec.ts` | Default `goto()`, `page.title()`, `toHaveURL()`, custom referer |
 | 245 | `245_GetByRole_PW.spec.ts` | `getByRole("link")` with name & disabled options |
 | 246 | `246_PressSeq.spec.ts` | `pressSequentially()` with delay, `goBack()` navigation |
+| 247 | `247_SessionStorage.spec.ts` | Save session state (`storageState()`) to JSON for reuse |
+| 248 | `248_TestVWODashboard.spec.ts` | `test.step()` with `attach()` screenshots & priority tags |
+| 249 | `249_TestVWODashboard_NoCustomReport.spec.ts` | Reuse saved session — skip login via `storageState` |
+| 250 | `250_Multi_Element.spec.ts` | `.all()`, `.allInnerTexts()`, loop & click matching element |
+| 251 | `251_Multi_Element_Direct.spec.ts` | `getByTestId()` for direct unique element targeting |
+| 252 | `252_WebTables_Dynamic_Xpath.spec.ts` | Dynamic XPath construction for web table cell traversal |
+| 253 | `253_WebTable_Dynamic.spec.ts` | Structured row extraction with `allInnerTexts()` |
 
 ## Key Concepts
 
@@ -103,7 +126,27 @@ Each `test()` block receives a fresh `page` fixture in a fresh `context`, ensuri
 - **Actions** — `fill()`, `click()`, `check()`, `pressSequentially()`, `goBack()`
 - **Navigation** — `goto()` with `waitUntil` options (`commit`, `domcontentloaded`, `load`, `networkidle`) and `referer`
 
-> **Note:** Files 232, 233, and 234 are standalone scripts (import from `playwright`, not `@playwright/test`). They have `.ts` extension (not `.spec.ts`) so the test runner skips them. Run with `npx ts-node <filename>` directly.
+### Session Storage & Reuse
+
+- **Save session** — `context.storageState({ path })` saves cookies + localStorage to a JSON file
+- **Reuse session** — `test.use({ storageState: './user-session.json' })` loads saved state, skipping login
+
+### Handling Multiple Elements
+
+- **`.all()`** — Returns array of `Locator` objects for iteration
+- **`.allInnerTexts()`** — Returns array of text content from all matched elements
+- **`getByTestId()`** — Target a single element via `data-testid` attribute
+
+### Web Table Traversal
+
+- Dynamic XPath construction to iterate rows/columns programmatically
+- `allInnerTexts()` on `tr > td` for structured row data extraction
+
+### Custom Reporter
+
+- `Utils/CustomReporter.ts` — Full HTML reporter with step-level screenshots, video playback, and real-time refresh
+
+> **Note:** Files 232, 233, 234, and 247 are standalone scripts (import from `playwright`, not `@playwright/test`). They have `.ts` extension (not `.spec.ts`) so the test runner skips them. Run with `npx ts-node <filename>` directly.
 
 ## Configuration
 
