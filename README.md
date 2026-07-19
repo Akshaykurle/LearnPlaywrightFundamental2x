@@ -70,7 +70,8 @@ tests/
 │   ├── 252_WebTables_Dynamic_Xpath.spec.ts # Dynamic XPath for web table traversal
 │   └── 253_WebTable_Dynamic.spec.ts        # Structured row extraction with allInnerTexts()
 └── tasks/
-    └── Project_Automate_Login_for_the_Student.spec.ts  # Practice: login automation
+    ├── Project_Automate_Login_for_the_Student.spec.ts  # Practice: login automation
+    └── Project_OrageHRM Webtable.spec.ts               # Web table traversal with dynamic XPath on OrangeHRM
 
 Utils/
 └── CustomReporter.ts                       # Custom HTML reporter (TTA Report)
@@ -105,6 +106,7 @@ Utils/
 | 251 | `251_Multi_Element_Direct.spec.ts` | `getByTestId()` for direct unique element targeting |
 | 252 | `252_WebTables_Dynamic_Xpath.spec.ts` | Dynamic XPath construction for web table cell traversal |
 | 253 | `253_WebTable_Dynamic.spec.ts` | Structured row extraction with `allInnerTexts()` |
+| - | `Project_OrageHRM Webtable.spec.ts` | Web table traversal on OrangeHRM: dynamic XPath + `allInnerTexts()` loop |
 
 ## Key Concepts
 
