@@ -160,6 +160,24 @@ The Playwright config (`playwright.config.ts`) is set up for learning:
 - **Video** — always recorded
 - **Browser** — Chromium only (others commented out)
 
+## Contributing
+
+Contributions are welcome! If you'd like to contribute:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/new-feature`)
+3. **Commit** your changes (`git commit -m 'Add new feature'`)
+4. **Push** to the branch (`git push origin feature/new-feature`)
+5. **Open** a Pull Request
+
+### Guidelines
+
+- Follow existing code style and naming conventions
+- Add test files in the appropriate numbered folder (e.g., `01 Basics/`, `02_first_tests/`)
+- Use sequential numbering for new test files (254, 255, ...)
+- Include descriptive comments explaining the concept being demonstrated
+- Update the README.md project structure and learning progression table when adding new files
+
 ## License
 
 ISC
