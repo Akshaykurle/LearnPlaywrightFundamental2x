@@ -12,3 +12,6 @@ node_modules/
 # Generated reports & session data
 /tta-report/
 user-session.json
+
+# Downloaded test artifacts
+out/
